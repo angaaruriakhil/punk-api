@@ -1,53 +1,110 @@
+// ─── Tokens ────────────────────────────────────────────────
+$card-w: 450px;
+$img-w: 120px;
+$img-h: 240px;
+
+$clr-bg: #0b4284;
+$clr-border1: #008000;
+$clr-border2: #1178c3;
+$clr-text: #fff;
+
+$shadow: 10px 10px 5px 0 rgba(0, 0, 0, 0.75);
+
+// ─── Base Card ─────────────────────────────────────────────
 .card {
-  width: 450px; 
-  // border: 3px solid #0069A0; 
-  border-radius: 15px; 
-  display: flex; 
-  justify-content: space-between; 
-  color: white;  
-  background-color: #006CA2;
-  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
-  background: linear-gradient(#0B4284, #0B4284) padding-box, linear-gradient(#008000, #1178c3) border-box; 
-  border: 4px solid transparent;  
-  padding: 10px; 
-  margin-top: 10px;    
+  width: $card-w;
+  border-radius: 15px;
+  display: flex;
+  justify-content: space-between;
+  color: $clr-text;
+  background: linear-gradient($clr-bg, $clr-bg) padding-box,
+    linear-gradient($clr-border1, $clr-border2) border-box;
+  border: 4px solid transparent;
+  box-shadow: $shadow;
+  padding: 10px;
+  margin-top: 10px;
+  transition: transform 180ms ease;
+
+  &:hover {
+    transform: scale(1.03);
+    will-change: transform;
+  }
+
   &__item-1 {
-    display: flex; 
+    display: flex;
     flex-direction: column;
-    align-items: center; 
-    justify-content: center; 
-    margin-right: 15px; 
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+
     &__img {
-      width: 100px;
-      height: 200px; 
+      width: $img-w;
+      height: $img-h;
+      object-fit: contain;
+      border-radius: 8px;
+      display: block;
+      transition: transform 200ms ease, filter 200ms ease;
+      transform-origin: center bottom;
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.15));
+      will-change: transform;
+
+      &:hover,
+      .card:hover & {
+        transform: rotate(-5deg) scale(1.08);
+      }
     }
   }
+
   &__item-2 {
-    display: flex; 
+    display: flex;
     flex-direction: column;
-    justify-content: flex-start; 
-    align-items: center; 
+    align-items: center;
     text-align: left;
-    margin: auto; 
+    margin: auto;
+
     &__description {
-      margin-bottom: 10px; 
-      margin-top: 10px; 
-    } 
+      margin: 10px 0;
+    }
   }
 }
 
-.card:hover {
-  transform: scale(1.1,1.1);
+// ─── SVG Icon ───────────────────────────────────────────────
+.beer-icon {
+  width: $img-w;
+  height: $img-h;
+  object-fit: contain;
+  border-radius: 8px;
+  opacity: 0.85;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.15));
+  transition: transform 200ms ease;
+
+  &:hover {
+    transform: rotate(-5deg) scale(1.08);
+  }
 }
 
-
+// ─── Responsive ─────────────────────────────────────────────
 @media screen and (max-width: 1200px) {
   .card {
-    width: 90vw; 
-  }
-  .card:hover {
-    transform: scale(1.0,1.0);
+    width: 90vw;
+
+    &:hover {
+      transform: none;
+    }
   }
 }
 
+// ─── Accessibility ─────────────────────────────────────────
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .beer-icon,
+  .card__item-1__img {
+    transition: none;
+  }
 
+  .card:hover,
+  .beer-icon:hover,
+  .card__item-1__img:hover {
+    transform: none;
+  }
+}

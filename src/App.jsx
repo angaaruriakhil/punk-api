@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import CardList from "./components/CardList/CardList";
 import Navbar from "./components/Navbar/Navbar";
 
-const BASE = "https://punkapi.online/v3";
+const BASE = "https://punkapi-alxiw.amvera.io/v3"; 
 const PER_PAGE = 80; // max the API allows as per https://github.com/alxiw/punkapi/tree/master
 
 const buildParams = ({ page, perPage, query, filters }) => {
